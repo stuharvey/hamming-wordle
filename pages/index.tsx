@@ -17,6 +17,7 @@ export async function getStaticProps() {
       word,
       wordList,
     },
+    revalidate: 5 * 60,
   };
 }
 
@@ -51,8 +52,6 @@ const Home = ({
   const [guessDistances, setGuessDistances] = useState([
     -1, -1, -1, -1, -1, -1,
   ]);
-
-  console.info(pendingBoard.length);
 
   useEffect(() => {
     function handleSubmit() {
