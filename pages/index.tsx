@@ -198,7 +198,7 @@ const Home = ({
         </section>
         {hammingDistance !== -1 && (
           <p className={styles.description}>
-            Hamming distance of last guess: {hammingDistance}
+            {5 - hammingDistance} correct
           </p>
         )}
         {!wordInList && <p className={styles.description}>Word not in list</p>}
