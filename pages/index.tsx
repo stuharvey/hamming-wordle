@@ -1,3 +1,8 @@
+/**
+ * This place is not a place of honor... no highly esteemed deed is commemorated here... nothing valued is here.
+ * What is here was dangerous and repulsive to us. This message is a warning about danger.
+ */
+
 import { useState, useEffect } from "react";
 import type { InferGetStaticPropsType } from "next";
 import Head from "next/head";
@@ -34,6 +39,26 @@ const getHammingDistance = (str1 = "", str2 = "") => {
   return dist;
 };
 
+const getLevenshteinDistance = (s: string, t: string) => {
+  if (!s.length) return t.length;
+  if (!t.length) return s.length;
+  const arr = [];
+  for (let i = 0; i <= t.length; i++) {
+    arr[i] = [i];
+    for (let j = 1; j <= s.length; j++) {
+      arr[i][j] =
+        i === 0
+          ? j
+          : Math.min(
+              arr[i - 1][j] + 1,
+              arr[i][j - 1] + 1,
+              arr[i - 1][j - 1] + (s[j - 1] === t[i - 1] ? 0 : 1)
+            );
+    }
+  }
+  return arr[t.length][s.length];
+};
+
 const Home = ({
   word,
   wordList,
@@ -52,6 +77,7 @@ const Home = ({
   const [guessDistances, setGuessDistances] = useState([
     -1, -1, -1, -1, -1, -1,
   ]);
+  const [levenshteinDistance, setLevenshteinDistance] = useState(-1)
 
   useEffect(() => {
     function handleSubmit() {
@@ -62,6 +88,8 @@ const Home = ({
       }
       setWordInList(true);
       const distance = getHammingDistance(currentGuess, word);
+      const lDistance = getLevenshteinDistance(currentGuess, word);
+      setLevenshteinDistance(lDistance)
       if (distance === 0) {
         setHammingDistance(0);
         const index = guessDistances.indexOf(-1);
