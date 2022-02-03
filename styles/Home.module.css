@@ -2,6 +2,71 @@
   padding: 0 2rem;
 }
 
+.board {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
+  padding: 10px;
+  width: 350px;
+  height: 420px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.tile {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: bold;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.tile[data-state="empty"] {
+  border: 2px solid gray;
+}
+
+.tile.filled {
+  color: white;
+}
+
+.tile[data-state="5"] {
+  background-color: rgb(235, 53, 40);
+}
+
+.tile[data-state="4"] {
+  background-color: rgb(237, 91, 46);
+}
+
+.tile[data-state="3"] {
+  background-color: rgb(241, 147, 59);
+}
+
+.tile[data-state="2"] {
+  background-color: rgb(241, 184, 80);
+}
+
+.tile[data-state="1"] {
+  background-color: rgb(174, 177, 75);
+}
+
+.tile[data-state="0"] {
+  background-color: rgb(123, 176, 89);
+}
+
+.tile[data-state="tbd"] {
+  background-color: white;
+  border: 2px solid black;
+  color: rgb(12, 11, 11);
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
@@ -51,8 +116,8 @@
 }
 
 .description {
-  margin: 4rem 0;
-  line-height: 1.5;
+  margin: 0;
+  line-height: 1;
   font-size: 1.5rem;
 }
 
